@@ -17,5 +17,4 @@ MANIFEST
 META.yml
 README
 t/method-trait.t
-t/subclass.t
 t/syntax-sugar.t
