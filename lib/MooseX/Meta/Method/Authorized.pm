@@ -1,5 +1,5 @@
 package MooseX::Meta::Method::Authorized;
-use Moose::Role;
+use MooseX::Meta::Method::Authorized::Meta::Role;
 use Moose::Util::TypeConstraints;
 use aliased 'MooseX::Meta::Method::Authorized::CheckRoles';
 
@@ -14,7 +14,7 @@ has verifier =>
     isa => duck_type(['authorized_do']),
     default => sub { $default_verifier } );
 
-around 'wrap' => sub {
+around wrap => sub {
     my ($wrap, $method, $code, %options) = @_;
 
     my $meth_obj;
@@ -27,6 +27,7 @@ around 'wrap' => sub {
       );
     return $meth_obj;
 };
+
 
 
 1;
