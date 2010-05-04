@@ -11,10 +11,13 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/MooseX/AuthorizedMethods.pm
 lib/MooseX/Meta/Method/Authorized.pm
+lib/MooseX/Meta/Method/Authorized/Application/ToInstance.pm
 lib/MooseX/Meta/Method/Authorized/CheckRoles.pm
+lib/MooseX/Meta/Method/Authorized/Meta/Role.pm
 Makefile.PL
 MANIFEST
 META.yml
 README
+t/apply-to-instance.t
 t/method-trait.t
 t/syntax-sugar.t
