@@ -11,6 +11,7 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/MooseX/AuthorizedMethods.pm
 lib/MooseX/Meta/Method/Authorized.pm
+lib/MooseX/Meta/Method/Authorized/CheckRoles.pm
 Makefile.PL
 MANIFEST
 META.yml
