@@ -39,11 +39,35 @@ MooseX::Meta::Method::Authorized - Authorization in method calls
 
 =head1 DESCRIPTION
 
-This is a parameterized role that receives the list of roles to be
-checked upon method invocation. It requires the instance class to
-support an "user" method, which will return an object that should
-support a "roles" method that should return all the roles given to
-that user.
+This trait provides support for verifying authorization before calling
+a method.
+
+=head1 ATTRIBUTES
+
+=over
+
+=item requires
+
+This attribute is an array reference with the values that are going to
+be used by the verifier when checking this invocation.
+
+=item verifier
+
+This is the object/class on which the "authorized_do" method is going
+to be invoked. This is the object responsible for doing the actual
+verification. It is invoked as:
+
+  $verifier->authorized_do($meth_obj, $code, @_)
+
+It is expected that this method should die if the authorization is not
+stablished.
+
+The default value for this attribute is
+L<MooseX::Meta::Method::Authorized::CheckRoles>, which will get the
+current user by calling the "user" method and list the roles given to
+that user by invoking the "roles" method.
+
+=back
 
 =head1 METHOD
 
@@ -52,26 +76,13 @@ that user.
 =item wrap
 
 This role overrides wrap so that the actual method is only invoked
-after the role being checked. 
-
-=back
-
-=head1 ATTRIBUTES
-
-=over
-
-=item schema
-
-This attribute contains a CodeRef that should return the schema
-object. It can be used to pass a schema object when it can be defined
-in compile-time, otherwise it will call "schema" on the object
-instance to find it.
+after the authorization being checked.
 
 =back
 
 =head1 SEE ALSO
 
-L<MooseX::TransactionalMethods>, L<Class::MOP::Method>
+L<MooseX::AuthorizedMethods>, L<Class::MOP::Method>
 
 =head1 AUTHORS
 

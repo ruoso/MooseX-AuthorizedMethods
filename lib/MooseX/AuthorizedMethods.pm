@@ -56,36 +56,38 @@ MooseX::AuthorizedMethods - Syntax sugar for authorized methods
 
 =head1 DESCRIPTION
 
-This method exports the "authorized" declarator that will enclose
-the method in a txn_do call.
+This method exports the "authorized" declarator that makes a
+verification if the user has the required permissions before the acual
+invocation. The default verification method will take the "user"
+method result and call "roles" to list the roles given to that user.
 
 =head1 DECLARATOR
 
 =over
 
-=item authorized $name => $code
+=item authorized $name => [qw(required permissions)], $code
 
-When you declare with only the name and the coderef, the wrapper will
-call 'schema' on your class to fetch the schema object on which it
-will call txn_do to enclose your coderef.
-
-=item authorized $name => $schema, $code
-
-When you declare sending the schema object, it will store it in the
-method metaclass and use it directly without any calls to this object.
-
-NOTE THAT MIXING DECLARTIONS WITH SCHEMA AND WITHOUT SCHEMA WILL LEAD
-TO PAINFULL CONFUSION SINCE THE WRAPPING IS SPECIFIC TO THAT CLASS AND
-THE BEHAVIOR IS NOT MODIFIED WHEN YOU OVERRIDE THE METHOD. PREFER
-USING THE DYNAMIC DECLARATOR WHEN POSSIBLE.
+This declarator will use the default verifier to check if the user has
+one of the given roles, it will die otherwise.
 
 =back
+
+=head1 CUSTOM VERIFIERS
+
+The default verifier used is
+L<MooseX::Meta::Method::Authorized::CheckRoles>, you might send an
+additional "verifier" option to the declarator with another object or
+class. A verifier is simply a duck type with the "authorized_do"
+method that is called as:
+
+  $verifier->authorized_do($method, $code, @_)
+
+It is expected that the verifier code die if the user doesn't fulfill
+the authorization requests.
 
 =head1 AUTHORS
 
 Daniel Ruoso E<lt>daniel@ruoso.comE<gt>
-
-With help from rafl and doy from #moose.
 
 =head1 COPYRIGHT AND LICENSE
 
