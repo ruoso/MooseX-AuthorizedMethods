@@ -1,14 +1,11 @@
 package MooseX::Meta::Method::Authorized::Meta::Role;
-use aliased 'MooseX::Meta::Method::Authorized::Application::ToInstance';
-use aliased 'MooseX::Meta::Method::Authorized::Application::ToComposite';
 use Moose::Role;
-use Moose::Exporter;
 use Moose::Util::MetaRole;
-
+use Moose::Exporter;
 Moose::Exporter->setup_import_methods(also => 'Moose::Role');
 
 sub init_meta {
-    my ($class, %opts) = @_;#
+    my ($class, %opts) = @_;
 
     Moose::Role->init_meta(%opts);
 
@@ -17,13 +14,17 @@ sub init_meta {
        for            => $opts{for_class},
        role_metaroles =>
        {
-        application_to_instance       => [ ToInstance ],
-        application_to_role_summation => [ ToComposite ],
+        application_to_role =>
+        ['MooseX::Meta::Method::Authorized::Application::ToComposite'],
+        application_to_class =>
+        ['MooseX::Meta::Method::Authorized::Application::ToClass'],
+        application_to_instance    =>
+        ['MooseX::Meta::Method::Authorized::Application::ToInstance'],
        }
       );
 
     return $opts{for_class}->meta();
-}
+};
 
 
 1;
