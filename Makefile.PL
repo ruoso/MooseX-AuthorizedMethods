@@ -4,6 +4,7 @@ name 'MooseX-AuthorizedMethods';
 all_from 'lib/MooseX/AuthorizedMethods.pm';
 
 requires 'Moose' => '0.90';
+requires 'aliased' => '0';
 
 auto_install;
 resources repository => 'http://github.com/ruoso/MooseX-AuthorizedMethods/';
