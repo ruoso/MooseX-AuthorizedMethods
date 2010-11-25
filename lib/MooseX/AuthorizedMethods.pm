@@ -4,7 +4,7 @@ use Moose::Exporter;
 use aliased 'MooseX::Meta::Method::Authorized';
 use Sub::Name;
 
-our $VERSION = 0.005;
+our $VERSION = 0.006;
 
 Moose::Exporter->setup_import_methods
   ( with_meta => [ 'authorized' ],

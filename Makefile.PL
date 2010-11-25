@@ -3,7 +3,7 @@ use inc::Module::Install 0.91;
 name 'MooseX-AuthorizedMethods';
 all_from 'lib/MooseX/AuthorizedMethods.pm';
 
-requires 'Moose' => '0.90';
+requires 'Moose' => '1.21';
 requires 'aliased' => '0';
 
 auto_install;
